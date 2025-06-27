@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CatsController } from './cats/cats.controller';
+import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Cat } from './cats/entities/cat.entity';
+import { AppService } from './app.service';
+import { CatsController } from './cats/cats.controller';
 import { CatsService } from './cats/cats.service';
 
 @Module({
@@ -11,12 +14,14 @@ import { CatsService } from './cats/cats.service';
       port: 3306,
       username: 'root',
       password: 'NuevoChete25',
-      database: 'Movies',
-      entities: [],
+      database: 'cats_db',
+      entities: [Cat],
+      retryDelay: 3000,
       synchronize: true,
     }),
   ],
-  controllers: [CatsController],
-  providers: [CatsService],
+  controllers: [AppController, CatsController],
+  providers: [AppService, CatsService],
+  exports: [TypeOrmModule],
 })
 export class AppModule {}
