@@ -12,7 +12,7 @@ export class CatsService {
     private catRepository: Repository<Cat>,
   ) {}
 
-  async create(body: CreateCatDto) {
+  async create(body: CreateCatDto): Promise<Cat> {
     const cat = this.catRepository.create(body);
     return await this.catRepository.save(cat);
   }

@@ -5,9 +5,11 @@ import { Cat } from './cats/entities/cat.entity';
 import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
 import { CatsService } from './cats/cats.service';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
   imports: [
+    CatsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
